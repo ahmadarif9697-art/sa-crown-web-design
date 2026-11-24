@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sacrown.in/sitemap.xml
