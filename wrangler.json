@@ -1,0 +1,32 @@
+{
+  "name": "sa-crown-web-design",
+  "main": "src/worker.ts",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "none",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": [
+      "/collections",
+      "/collections/*",
+      "/products",
+      "/products/*",
+      "/policies",
+      "/policies/*",
+      "/cart",
+      "/cart/*",
+      "/pages",
+      "/pages/*",
+      "/blogs",
+      "/blogs/*",
+      "/search",
+      "/account",
+      "/account/*",
+      "/checkouts",
+      "/checkouts/*",
+      "/variants",
+      "/variants/*"
+    ]
+  }
+}

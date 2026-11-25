@@ -16,7 +16,9 @@ import { TheIvoryTableCaseStudyPage } from './pages/TheIvoryTableCaseStudyPage';
 import { NorthboundCaseStudyPage } from './pages/NorthboundCaseStudyPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { PageRoute, EnquiryContext } from './types/navigation';
+import { isObsoleteShopifyPath, isValidAppDocumentPath } from './utils/routePaths';
 
 const HASH_TO_PAGE: Record<string, PageRoute> = {
   '#home': 'home',
@@ -40,19 +42,28 @@ const PAGE_TO_HASH: Record<PageRoute, string> = {
   contact: '#contact',
 };
 
+function getInitialPathname(): string {
+  if (typeof window === 'undefined') return '/';
+  return window.location.pathname || '/';
+}
+
 function getInitialPage(): PageRoute {
   if (typeof window === 'undefined') return 'home';
   return HASH_TO_PAGE[window.location.hash] || 'home';
 }
 
 export default function App() {
+  const [pathname, setPathname] = useState<string>(getInitialPathname);
   const [currentPage, setCurrentPage] = useState<PageRoute>(getInitialPage);
   const [enquiry, setEnquiry] = useState<EnquiryContext>({
     isOpen: false,
   });
 
+  const isNotFound = !isValidAppDocumentPath(pathname) || isObsoleteShopifyPath(pathname);
+
   useEffect(() => {
-    const syncFromHash = () => {
+    const syncFromLocation = () => {
+      setPathname(window.location.pathname || '/');
       const hash = window.location.hash;
       if (!hash || hash === '#') {
         setCurrentPage('home');
@@ -65,19 +76,21 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
-    window.addEventListener('hashchange', syncFromHash);
-    window.addEventListener('popstate', syncFromHash);
+    window.addEventListener('hashchange', syncFromLocation);
+    window.addEventListener('popstate', syncFromLocation);
     return () => {
-      window.removeEventListener('hashchange', syncFromHash);
-      window.removeEventListener('popstate', syncFromHash);
+      window.removeEventListener('hashchange', syncFromLocation);
+      window.removeEventListener('popstate', syncFromLocation);
     };
   }, []);
 
   const handleNavigate = (page: PageRoute) => {
     setCurrentPage(page);
+    setPathname('/');
     const targetHash = PAGE_TO_HASH[page];
-    if (window.location.hash !== targetHash) {
-      window.history.pushState(null, '', targetHash);
+    const targetUrl = `/${targetHash}`;
+    if (window.location.pathname !== '/' || window.location.hash !== targetHash) {
+      window.history.pushState(null, '', targetUrl);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -102,49 +115,55 @@ export default function App() {
       />
 
       <main className="flex-1">
-        {currentPage === 'home' && (
-          <HomePage
-            onNavigate={handleNavigate}
-            onOpenEnquiry={handleOpenEnquiry}
-          />
+        {isNotFound ? (
+          <NotFoundPage pathname={pathname} onReturnHome={(page = 'home') => handleNavigate(page)} />
+        ) : (
+          <>
+            {currentPage === 'home' && (
+              <HomePage
+                onNavigate={handleNavigate}
+                onOpenEnquiry={handleOpenEnquiry}
+              />
+            )}
+            {currentPage === 'services' && (
+              <ServicesPage
+                onNavigate={handleNavigate}
+                onOpenEnquiry={handleOpenEnquiry}
+              />
+            )}
+            {currentPage === 'work' && (
+              <PortfolioPage
+                onNavigate={handleNavigate}
+                onOpenEnquiry={handleOpenEnquiry}
+              />
+            )}
+            {currentPage === 'case-study' && (
+              <CaseStudyPage
+                onNavigate={handleNavigate}
+                onOpenEnquiry={handleOpenEnquiry}
+              />
+            )}
+            {currentPage === 'ivory-table-study' && (
+              <TheIvoryTableCaseStudyPage
+                onNavigate={handleNavigate}
+                onOpenEnquiry={handleOpenEnquiry}
+              />
+            )}
+            {currentPage === 'northbound-study' && (
+              <NorthboundCaseStudyPage
+                onNavigate={handleNavigate}
+                onOpenEnquiry={handleOpenEnquiry}
+              />
+            )}
+            {currentPage === 'about' && (
+              <AboutPage
+                onNavigate={handleNavigate}
+                onOpenEnquiry={handleOpenEnquiry}
+              />
+            )}
+            {currentPage === 'contact' && <ContactPage />}
+          </>
         )}
-        {currentPage === 'services' && (
-          <ServicesPage
-            onNavigate={handleNavigate}
-            onOpenEnquiry={handleOpenEnquiry}
-          />
-        )}
-        {currentPage === 'work' && (
-          <PortfolioPage
-            onNavigate={handleNavigate}
-            onOpenEnquiry={handleOpenEnquiry}
-          />
-        )}
-        {currentPage === 'case-study' && (
-          <CaseStudyPage
-            onNavigate={handleNavigate}
-            onOpenEnquiry={handleOpenEnquiry}
-          />
-        )}
-        {currentPage === 'ivory-table-study' && (
-          <TheIvoryTableCaseStudyPage
-            onNavigate={handleNavigate}
-            onOpenEnquiry={handleOpenEnquiry}
-          />
-        )}
-        {currentPage === 'northbound-study' && (
-          <NorthboundCaseStudyPage
-            onNavigate={handleNavigate}
-            onOpenEnquiry={handleOpenEnquiry}
-          />
-        )}
-        {currentPage === 'about' && (
-          <AboutPage
-            onNavigate={handleNavigate}
-            onOpenEnquiry={handleOpenEnquiry}
-          />
-        )}
-        {currentPage === 'contact' && <ContactPage />}
       </main>
 
       <Footer
