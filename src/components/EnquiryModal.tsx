@@ -62,7 +62,9 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
       setForm((prev) => ({
         ...prev,
         projectType:
-          subjectHint?.includes('Alpine Sanctuary') || subjectHint?.includes('Ivory Table')
+          subjectHint?.includes('Alpine Sanctuary') ||
+          subjectHint?.includes('Ivory Table') ||
+          subjectHint?.includes('Northbound')
             ? 'Hospitality / Brand Flagship Concept'
             : subjectHint
             ? PROJECT_TYPES[0]

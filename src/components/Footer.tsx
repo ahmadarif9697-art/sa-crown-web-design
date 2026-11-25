@@ -50,6 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenEnquiry }) => 
                   { id: 'work', label: 'Portfolio / Our Work' },
                   { id: 'case-study', label: 'Alpine Sanctuary Case Study' },
                   { id: 'ivory-table-study', label: 'The Ivory Table Case Study' },
+                  { id: 'northbound-study', label: 'Northbound Journeys Case Study' },
                   { id: 'about', label: 'About the Studio' },
                   { id: 'contact', label: 'Contact' },
                 ] as { id: PageRoute; label: string }[]

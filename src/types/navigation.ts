@@ -4,6 +4,7 @@ export type PageRoute =
   | 'work'
   | 'case-study'
   | 'ivory-table-study'
+  | 'northbound-study'
   | 'about'
   | 'contact';
 

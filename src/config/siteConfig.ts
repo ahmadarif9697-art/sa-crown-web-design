@@ -42,14 +42,24 @@ export const siteConfig = {
     alpineSanctuary: {
       title: 'Alpine Sanctuary',
       classification: 'Fictional Luxury Hotel Design Concept',
-      // Driven by VITE_ALPINE_DEMO_URL; resolves to null when unavailable or invalid.
-      publicDemoUrl: resolvePublicDemoUrl(import.meta.env?.VITE_ALPINE_DEMO_URL),
+      // Uses VITE_ALPINE_DEMO_URL when configured, defaulting to the published demo URL.
+      publicDemoUrl:
+        resolvePublicDemoUrl(import.meta.env?.VITE_ALPINE_DEMO_URL) ||
+        'https://alpine-sanctuary.ai.studio',
     },
     theIvoryTable: {
       title: 'The Ivory Table',
       category: 'Fine Dining & Hospitality',
       classification: 'Fictional Luxury Restaurant Design Concept',
       publicDemoUrl: 'https://the-ivory-table.ahmadarif9697.workers.dev',
+    },
+    northboundJourneys: {
+      title: 'Northbound Journeys',
+      brandDisplay: 'NORTHBOUND JOURNEYS',
+      category: 'Luxury Travel & Expeditions',
+      tagline: 'Beyond the Ordinary. Into the Extraordinary.',
+      classification: 'Fictional Brand & Portfolio Concept',
+      publicDemoUrl: 'https://northbound-journeys.ahmadarif9697.workers.dev',
     },
   },
 } as const;
