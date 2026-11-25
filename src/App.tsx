@@ -12,6 +12,7 @@ import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
 import { PortfolioPage } from './pages/PortfolioPage';
 import { CaseStudyPage } from './pages/CaseStudyPage';
+import { TheIvoryTableCaseStudyPage } from './pages/TheIvoryTableCaseStudyPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { PageRoute, EnquiryContext } from './types/navigation';
@@ -21,6 +22,7 @@ const HASH_TO_PAGE: Record<string, PageRoute> = {
   '#services': 'services',
   '#work': 'work',
   '#alpine-sanctuary': 'case-study',
+  '#the-ivory-table': 'ivory-table-study',
   '#about': 'about',
   '#contact': 'contact',
 };
@@ -30,6 +32,7 @@ const PAGE_TO_HASH: Record<PageRoute, string> = {
   services: '#services',
   work: '#work',
   'case-study': '#alpine-sanctuary',
+  'ivory-table-study': '#the-ivory-table',
   about: '#about',
   contact: '#contact',
 };
@@ -116,6 +119,12 @@ export default function App() {
         )}
         {currentPage === 'case-study' && (
           <CaseStudyPage
+            onNavigate={handleNavigate}
+            onOpenEnquiry={handleOpenEnquiry}
+          />
+        )}
+        {currentPage === 'ivory-table-study' && (
+          <TheIvoryTableCaseStudyPage
             onNavigate={handleNavigate}
             onOpenEnquiry={handleOpenEnquiry}
           />

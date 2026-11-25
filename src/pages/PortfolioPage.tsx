@@ -10,12 +10,14 @@ interface PortfolioPageProps {
 }
 
 const ALPINE_HERO_IMG = '/src/assets/images/alpine_resort_panorama_1795494665477.jpg';
+const IVORY_TABLE_HERO_IMG = '/src/assets/images/ivory_table_dining_hero_1795527375285.jpg';
 
 export const PortfolioPage: React.FC<PortfolioPageProps> = ({
   onNavigate,
   onOpenEnquiry,
 }) => {
   const demoUrl = siteConfig.projects.alpineSanctuary.publicDemoUrl;
+  const ivoryDemoUrl = siteConfig.projects.theIvoryTable.publicDemoUrl;
 
   return (
     <div>
@@ -35,9 +37,10 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
         </div>
       </section>
 
-      {/* Featured Project 01: Alpine Sanctuary */}
+      {/* Featured Projects */}
       <section className="bg-[#F5EBD7] text-[#202522] py-16 sm:py-24 border-b border-[#102B25]/12">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 space-y-10">
+          {/* Featured Project 01: Alpine Sanctuary */}
           <div className="bg-[#102B25] text-[#F5EBD7] border border-[#D6B66F]/25 rounded-sm overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
               <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto lg:min-h-[440px] bg-[#0B1F1B] overflow-hidden border-b lg:border-b-0 lg:border-r border-[#D6B66F]/20">
@@ -127,8 +130,92 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
             </div>
           </div>
 
+          {/* Featured Project 02: The Ivory Table */}
+          <div className="bg-[#102B25] text-[#F5EBD7] border border-[#D6B66F]/25 rounded-sm overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto lg:min-h-[440px] bg-[#0B1F1B] overflow-hidden border-b lg:border-b-0 lg:border-r border-[#D6B66F]/20">
+                <SafeImage
+                  src={IVORY_TABLE_HERO_IMG}
+                  alt="The Ivory Table luxury fine-dining restaurant interior with candlelit ivory linen tables, fluted forest-green oak paneling, and travertine arches"
+                  className="w-full h-full object-cover object-center"
+                  fallbackTitle="The Ivory Table Concept"
+                />
+              </div>
+
+              <div className="lg:col-span-5 p-7 sm:p-10 flex flex-col justify-between">
+                <div>
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs uppercase tracking-[0.14em] text-[#D6B66F]">
+                    <span className="font-semibold tabular-nums">Project 02</span>
+                    <span aria-hidden="true">·</span>
+                    <span className="font-semibold">
+                      {siteConfig.projects.theIvoryTable.category}
+                    </span>
+                    <span aria-hidden="true">·</span>
+                    <span className="font-semibold">
+                      {siteConfig.projects.theIvoryTable.classification}
+                    </span>
+                  </div>
+
+                  <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#F5EBD7] mt-3">
+                    {siteConfig.projects.theIvoryTable.title}
+                  </h2>
+
+                  <p className="text-sm sm:text-base text-[#F5EBD7]/80 leading-relaxed mt-4">
+                    An elegant digital experience for a fictional luxury restaurant, featuring an
+                    editorial menu, culinary photography, restaurant storytelling and interactive
+                    reservation interface.
+                  </p>
+
+                  <div className="mt-6 pt-5 border-t border-[#D6B66F]/20 space-y-2 text-xs text-[#F5EBD7]/80">
+                    <p>
+                      <strong className="text-[#D6B66F] font-semibold">Services:</strong> Website
+                      Design, UI/UX Design, Responsive Development, Interactive Forms
+                    </p>
+                    <p>
+                      <strong className="text-[#D6B66F] font-semibold">Concept Note:</strong>{' '}
+                      Fictional portfolio project — reservations are a front-end UI demonstration
+                      not connected to a live booking system.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 space-y-3">
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href={ivoryDemoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-3 bg-[#D6B66F] text-[#102B25] text-xs font-semibold rounded-sm hover:bg-[#E5CD96] transition-colors min-h-[44px] whitespace-nowrap"
+                    >
+                      <span>View Live Demo</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('ivory-table-study')}
+                      className="inline-flex items-center gap-2 px-5 py-3 border border-[#F5EBD7]/30 text-[#F5EBD7] text-xs font-medium rounded-sm hover:border-[#D6B66F] hover:text-[#D6B66F] transition-colors cursor-pointer min-h-[44px] whitespace-nowrap"
+                    >
+                      <span>Explore Case Study</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => onOpenEnquiry('The Ivory Table Fine Dining Concept')}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#D6B66F] hover:text-[#E5CD96] underline underline-offset-4 decoration-[#D6B66F]/60 transition-colors cursor-pointer pt-1"
+                  >
+                    <span>Discuss a Similar Restaurant Website</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Honest Next-Commission Card */}
-          <div className="mt-10 p-7 sm:p-10 bg-[#102B25] text-[#F5EBD7] rounded-sm border border-[#D6B66F]/25 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="p-7 sm:p-10 bg-[#102B25] text-[#F5EBD7] rounded-sm border border-[#D6B66F]/25 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D6B66F]">
                 Commission Availability

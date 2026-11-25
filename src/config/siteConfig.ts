@@ -45,6 +45,12 @@ export const siteConfig = {
       // Driven by VITE_ALPINE_DEMO_URL; resolves to null when unavailable or invalid.
       publicDemoUrl: resolvePublicDemoUrl(import.meta.env?.VITE_ALPINE_DEMO_URL),
     },
+    theIvoryTable: {
+      title: 'The Ivory Table',
+      category: 'Fine Dining & Hospitality',
+      classification: 'Fictional Luxury Restaurant Design Concept',
+      publicDemoUrl: 'https://the-ivory-table.ahmadarif9697.workers.dev',
+    },
   },
 } as const;
 

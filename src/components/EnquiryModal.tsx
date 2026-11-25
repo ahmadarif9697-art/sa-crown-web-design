@@ -61,11 +61,12 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
       setCopied(false);
       setForm((prev) => ({
         ...prev,
-        projectType: subjectHint?.includes('Alpine Sanctuary')
-          ? 'Hospitality / Brand Flagship Concept'
-          : subjectHint
-          ? PROJECT_TYPES[0]
-          : prev.projectType,
+        projectType:
+          subjectHint?.includes('Alpine Sanctuary') || subjectHint?.includes('Ivory Table')
+            ? 'Hospitality / Brand Flagship Concept'
+            : subjectHint
+            ? PROJECT_TYPES[0]
+            : prev.projectType,
         details: subjectHint
           ? `I would like to discuss a project inspired by ${subjectHint}.`
           : prev.details.startsWith('I would like to discuss a project inspired by ')
